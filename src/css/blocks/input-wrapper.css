@@ -3,6 +3,7 @@
 
   display: flex;
   flex-wrap: wrap;
+  gap: 10px;
   margin-bottom: 24px;
 }
 
@@ -58,7 +59,7 @@
 
 .input-wrapper h4 {
   width: 100%;
-  margin-bottom: 8px;
+  margin-bottom: 0;
 
   font-weight: 400;
   font-size: 14px;
@@ -72,6 +73,7 @@
 
 .input-wrapper--input-group {
   display: flex;
+  gap: 0;
   width: 484px;
 }
 
@@ -131,9 +133,8 @@
 }
 
 .input-wrapper--radio-group label {
-  margin-right: 3px;
   padding: 12px 24px;
-
+  border-radius: 22px;
   background: var(--color-radio-base);
   cursor: pointer;
 
@@ -156,14 +157,8 @@
   background: var(--color-radio-checked-hover);
 }
 
-.input-wrapper--radio-group label:first-of-type {
-  border-radius: 22px 0 0 22px;
-}
-
 .input-wrapper--radio-group label:last-of-type {
   margin-right: 0;
-
-  border-radius: 0 22px 22px 0;
 }
 
 .input-wrapper--hidden {
@@ -173,3 +168,8 @@
 .input-wrapper--payment-method {
   margin-bottom: 29px;
 }
+
+.input-wrapper--payment-method + .input-wrapper--input-group h4 {
+  margin-bottom: 8px;
+}
+
