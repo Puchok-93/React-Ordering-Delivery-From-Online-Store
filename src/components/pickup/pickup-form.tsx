@@ -9,9 +9,10 @@ import { useState } from "react";
 
 type TPickupFormProps = {
 	cities: TCities;
+	activeTab: 'pickup' | 'delivery';
 }
 
-function PickupForm({cities}: TPickupFormProps) {
+function PickupForm({cities, activeTab}: TPickupFormProps) {
 	const [selectedCity, setSelectedCity] = useState('led');
 	const [selectedAddress, setSelectedAddress] = useState('');
 
@@ -60,7 +61,7 @@ function PickupForm({cities}: TPickupFormProps) {
 				</div>
 				<PickupMap/>
 				<Payment/>
-				<Phone/>
+				<Phone deliveryType={activeTab} />
 				<SubmitBlock/>
 			</form>
 		</section>

@@ -1,4 +1,12 @@
-function Phone() {
+import {DELIVERY_PHONE_TEXT, PICKUP_PHONE_TEXT} from '../const.ts';
+
+type TPhoneProps = {
+	deliveryType: 'pickup' | 'delivery';
+};
+
+
+function Phone({deliveryType}: TPhoneProps ) {
+	const label = deliveryType === 'pickup' ? PICKUP_PHONE_TEXT : DELIVERY_PHONE_TEXT;
     return(
 		<>
 			<div className="input-wrapper input-wrapper--input">
@@ -7,7 +15,7 @@ function Phone() {
 				<label htmlFor="phone" aria-label="Введите верный номер телефона, он должен начинаться с +7"></label>
 				<div className="input-wrapper__error">Введите верный номер телефона, он должен начинаться с +7</div>
 			</div>
-			<span className="form__info" >Товар на складе будет привязан к номеру телефона. В пункте выдачи назовите номер телефона, чтобы получить ваш заказ.</span>
+			<span className="form__info">{label}</span>
 		</>
     );
 }
