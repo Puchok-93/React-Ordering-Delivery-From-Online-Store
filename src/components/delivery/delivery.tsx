@@ -10,9 +10,10 @@ import { useState } from "react";
 
 type TDeliveryFormProps = {
 	cities: TCities;
+	activeTab: 'pickup' | 'delivery';
 }
 
-function DeliveryForm({cities}: TDeliveryFormProps) {
+function DeliveryForm({cities, activeTab}: TDeliveryFormProps) {
     const [selectedCity, setSelectedCity] = useState('led');
 
     return(            
@@ -38,7 +39,7 @@ function DeliveryForm({cities}: TDeliveryFormProps) {
 				<DeliveryDate/>
 				<DeliveryTime/>
 				<Payment/>
-				<Phone/>
+				<Phone deliveryType={activeTab} />
 				<SubmitBlock/>
 			</form>
 			</section>

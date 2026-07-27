@@ -19,8 +19,8 @@ function Checkout() {
                     onChange={setActiveTab}
                 />
                 {activeTab === 'pickup' ?  
-                    <PickupForm cities={cities}/> :
-                    <DeliveryForm cities={cities}/>
+                    <PickupForm cities={cities} activeTab={activeTab}/> :
+                    <DeliveryForm cities={cities} activeTab={activeTab}/>
                 }
             </main>
         </div>
