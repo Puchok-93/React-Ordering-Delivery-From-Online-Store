@@ -28,6 +28,8 @@
   user-select: none;
   transition: box-shadow var(--transition-base),
     background var(--transition-base);
+    background: #ffffff;
+    border: none;
 }
 
 .tab span {
