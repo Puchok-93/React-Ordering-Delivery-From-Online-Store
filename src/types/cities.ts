@@ -7,7 +7,7 @@ type TCity = {
     deliveryPoints: TDeliveryPoint[];
 };
 
-type TDeliveryPoint = {
+export type TDeliveryPoint = {
     address: string;
     coordinates: TCoordinates;
 };

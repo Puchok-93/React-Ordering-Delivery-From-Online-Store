@@ -1,23 +1,25 @@
+import type { TDeliveryPoint } from "../../types/cities";
 
 type TAddressesProps = {
 	id: number;
 	cityId: number;
-	address: string;
-	pickupAddress: string;
-	onChange: (address: string) => void;
+	index: number;
+	point: TDeliveryPoint;
+	selectedPoint:  TDeliveryPoint | null;
+	onChange: (point: TDeliveryPoint) => void;
 }
 
-function PickupAddresses({id, cityId, address, pickupAddress, onChange}: TAddressesProps) {
+function PickupAddresses({id, cityId, point, selectedPoint, onChange}: TAddressesProps) {
     return(
         <>
             <input 
 			id={`pick-up-${cityId}-address-${id}`} 
 			type="radio" 
-			name={`${cityId}-${address}`} 
-			value={address}
-			checked={pickupAddress === address}
-			onChange={() => onChange(address)}/>
-            <label htmlFor={`pick-up-${cityId}-address-${id}`}>{address}</label>
+			name={`${cityId}-${point.address}`} 
+			value={point.address}
+			checked={selectedPoint?.address === point.address}
+			onChange={() => onChange(point)}/>
+            <label htmlFor={`pick-up-${cityId}-address-${id}`}>{point.address}</label>
         </>
     );
 }
