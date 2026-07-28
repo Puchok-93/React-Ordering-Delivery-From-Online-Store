@@ -10,20 +10,16 @@ import { useState } from "react";
 type TPickupFormProps = {
 	cities: TCities;
 	activeTab: 'pickup' | 'delivery';
+	selectedCity: string;
+	onCityChange: (cityId: string) => void;
 }
 
-function PickupForm({cities, activeTab}: TPickupFormProps) {
-	const [selectedCity, setSelectedCity] = useState('led');
-	const [selectedAddress, setSelectedAddress] = useState('');
+function PickupForm({cities, activeTab, selectedCity, onCityChange}: TPickupFormProps) {
+	const [pickupAddress, setpickupAddress] = useState('');
 
 	const currentCity = cities.find(
 		(city) => city.cityId === selectedCity
 	);
-
-	const handleCityChange = (cityId: string) => {
-		setSelectedCity(cityId);
-		setSelectedAddress("");
-	};
 
     return(
 		<section className="form tabs-block__pick-up">
@@ -39,7 +35,7 @@ function PickupForm({cities, activeTab}: TPickupFormProps) {
 								city={city}
 								cityId={cityId}
 								selectedCity={selectedCity}
-								onChange={handleCityChange}
+								onChange={onCityChange}
 							/>
 						))
 					}
@@ -53,8 +49,8 @@ function PickupForm({cities, activeTab}: TPickupFormProps) {
 								id={i}
 								cityId={currentCity.id}
 								address={address}
-								selectedAddress={selectedAddress}
-								onChange={setSelectedAddress}
+								pickupAddress={pickupAddress}
+								onChange={setpickupAddress}
 							/>
 						))
 					}

@@ -3,11 +3,11 @@ type TAddressesProps = {
 	id: number;
 	cityId: number;
 	address: string;
-	selectedAddress: string;
+	pickupAddress: string;
 	onChange: (address: string) => void;
 }
 
-function PickupAddresses({id, cityId, address, selectedAddress, onChange}: TAddressesProps) {
+function PickupAddresses({id, cityId, address, pickupAddress, onChange}: TAddressesProps) {
     return(
         <>
             <input 
@@ -15,7 +15,7 @@ function PickupAddresses({id, cityId, address, selectedAddress, onChange}: TAddr
 			type="radio" 
 			name={`${cityId}-${address}`} 
 			value={address}
-			checked={selectedAddress === address}
+			checked={pickupAddress === address}
 			onChange={() => onChange(address)}/>
             <label htmlFor={`pick-up-${cityId}-address-${id}`}>{address}</label>
         </>
