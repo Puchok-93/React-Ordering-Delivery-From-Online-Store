@@ -6,24 +6,26 @@ import Payment from "../payment/payment";
 import Phone from "../phone/phone";
 import SubmitBlock from "../submit-block/submit-block";
 import { useState } from "react";
+import type { TDeliveryPoint } from "../../types/cities";
 
 type TPickupFormProps = {
 	cities: TCities;
 	activeTab: 'pickup' | 'delivery';
+	selectedCity: string;
+	onCityChange: (cityId: string) => void;
 }
 
-function PickupForm({cities, activeTab}: TPickupFormProps) {
-	const [selectedCity, setSelectedCity] = useState('led');
-	const [selectedAddress, setSelectedAddress] = useState('');
+function PickupForm({cities, activeTab, selectedCity, onCityChange}: TPickupFormProps) {
+	const [selectedPoint, setSelectedPoint] = useState<TDeliveryPoint | null>(null);
 
 	const currentCity = cities.find(
 		(city) => city.cityId === selectedCity
 	);
 
-	const handleCityChange = (cityId: string) => {
-		setSelectedCity(cityId);
-		setSelectedAddress("");
-	};
+	const currentPoint =
+        selectedPoint && currentCity?.deliveryPoints.includes(selectedPoint)
+        ? selectedPoint
+        : currentCity?.deliveryPoints[0] ?? null;
 
     return(
 		<section className="form tabs-block__pick-up">
@@ -39,7 +41,7 @@ function PickupForm({cities, activeTab}: TPickupFormProps) {
 								city={city}
 								cityId={cityId}
 								selectedCity={selectedCity}
-								onChange={handleCityChange}
+								onChange={onCityChange}
 							/>
 						))
 					}
@@ -47,19 +49,20 @@ function PickupForm({cities, activeTab}: TPickupFormProps) {
 				<div className="input-wrapper input-wrapper--radio-group">
 					<h4>Адрес пункта выдачи заказов</h4>
 					{
-						currentCity?.deliveryPoints.map(({address}, i) => (
+						currentCity?.deliveryPoints.map((point, index) => (
 							<PickupAddresses
-								key={i}
-								id={i}
+								key={index}
+								id={index}
+								index={index}
 								cityId={currentCity.id}
-								address={address}
-								selectedAddress={selectedAddress}
-								onChange={setSelectedAddress}
+								point={point}
+								selectedPoint={currentPoint}
+								onChange={setSelectedPoint}
 							/>
 						))
 					}
 				</div>
-				<PickupMap/>
+				<PickupMap point={currentPoint}/>
 				<Payment/>
 				<Phone deliveryType={activeTab} />
 				<SubmitBlock/>

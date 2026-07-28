@@ -6,16 +6,15 @@ import DeliveryTime from "./delivery-time";
 import Phone from "../phone/phone";
 import Payment from "../payment/payment";
 import SubmitBlock from "../submit-block/submit-block";
-import { useState } from "react";
 
 type TDeliveryFormProps = {
 	cities: TCities;
 	activeTab: 'pickup' | 'delivery';
+	selectedCity: string;
+	onCityChange: (cityId: string) => void;
 }
 
-function DeliveryForm({cities, activeTab}: TDeliveryFormProps) {
-    const [selectedCity, setSelectedCity] = useState('led');
-
+function DeliveryForm({cities, activeTab, selectedCity, onCityChange}: TDeliveryFormProps) {
     return(            
 		<section className="form tabs-block__item-delivery">
 			<h2 className="visually-hidden">Форма самовывоза</h2>
@@ -30,7 +29,7 @@ function DeliveryForm({cities, activeTab}: TDeliveryFormProps) {
 							city={city}
 							cityId={cityId}
 							selectedCity={selectedCity}
-							onChange={setSelectedCity}
+							onChange={onCityChange}
 						/>
 					))
 					}

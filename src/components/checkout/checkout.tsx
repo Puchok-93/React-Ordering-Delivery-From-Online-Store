@@ -8,6 +8,7 @@ import { useState } from "react";
 
 function Checkout() {
     const [activeTab, setActiveTab] = useState<'pickup' | 'delivery'>('pickup');
+    const [selectedCity, setSelectedCity] = useState('led');
 
     return(
         <div className="wrapper">
@@ -19,8 +20,18 @@ function Checkout() {
                     onChange={setActiveTab}
                 />
                 {activeTab === 'pickup' ?  
-                    <PickupForm cities={cities} activeTab={activeTab}/> :
-                    <DeliveryForm cities={cities} activeTab={activeTab}/>
+                    <PickupForm 
+                        cities={cities} 
+                        activeTab={activeTab}
+                        selectedCity={selectedCity}
+                        onCityChange={setSelectedCity}
+                    /> :
+                    <DeliveryForm 
+                        cities={cities} 
+                        activeTab={activeTab}
+                        selectedCity={selectedCity}
+                        onCityChange={setSelectedCity}
+                    />
                 }
             </main>
         </div>
